@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head></head>
+   <body>
+      <hr/>	
+      <h3>Chaat</h3>
+      <h3>BhailCome {{ username }} </h3>
+      
+      <table>
+         <thead>
+         </thead>
+         
+         <tbody>
+            {% for msg in msgs %}
+               <tr>
+                  <td>{{ msg.msg_from }}</td>
+                  <td>{{ msg.msg }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      <form action = "{{ request.path }}" method = "post">
+         <textarea name = "chat" placeholder = "Type here to chat..."></textarea><br>
+         <input type = "submit" value = "Send" />
+      </form>
+   </body>
+</html>
