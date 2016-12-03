@@ -1,4 +1,31 @@
 <!DOCTYPE html>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var getchat=function(){
+          setTimeout(function () {
+             $.ajax({url: "http://localhost:5000/getchats", success: function(result){
+                
+                var html_table="";
+                html_table = html_table +  "<table><thead></thead><tbody>";
+
+                for(var i=0;i<result["samp"].length;i++)
+                html_table = html_table + "<tr><td>"+result['samp'][i]['from']+"</td><td>"+result['samp'][i]['message']+"</td></tr>";
+
+                html_table =html_table +"</tbody></table>";
+                
+               $("#chat_con").html(html_table);
+               }
+                });
+       
+        
+        getchat();
+    }, 1000);
+   }
+   getchat();
+</script>
 <html lang = "en">
    <head></head>
    <body>
@@ -6,6 +33,7 @@
       <h3>Chaat</h3>
       <h3>BhailCome {{ username }} </h3>
       
+      <div id="chat_con">
       <table>
          <thead>
          </thead>
@@ -19,6 +47,7 @@
             {% endfor %}
          </tbody>
       </table>
+      </div>
       <form action = "{{ request.path }}" method = "post">
          <textarea name = "chat" placeholder = "Type here to chat..."></textarea><br>
          <input type = "submit" value = "Send" />
